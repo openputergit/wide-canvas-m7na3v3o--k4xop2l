@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .sidebar-link:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        .module-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Sidebar -->
+    <div class="fixed h-full w-64 bg-white shadow-lg">
+        <div class="p-4 border-b">
+            <h1 class="text-2xl font-bold text-blue-600">SchoolManage</h1>
+        </div>
+        <nav class="p-4">
+            <a href="#dashboard" class="sidebar-link flex items-center p-3 rounded-lg mb-2 text-gray-700">
+                <i class="bi bi-grid-1x2-fill mr-3"></i> Dashboard
+            </a>
+            <a href="#class" class="sidebar-link flex items-center p-3 rounded-lg mb-2 text-gray-700">
+                <i class="bi bi-mortarboard-fill mr-3"></i> Class Management
+            </a>
+            <a href="#library" class="sidebar-link flex items-center p-3 rounded-lg mb-2 text-gray-700">
+                <i class="bi bi-book-fill mr-3"></i> Library
+            </a>
+            <a href="#finance" class="sidebar-link flex items-center p-3 rounded-lg mb-2 text-gray-700">
+                <i class="bi bi-cash-coin mr-3"></i> Finance
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-64 p-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-800">Dashboard</h2>
+            <div class="flex items-center">
+                <div class="relative mr-4">
+                    <input type="search" placeholder="Search..." class="px-4 py-2 rounded-lg border">
+                    <i class="bi bi-search absolute right-3 top-3 text-gray-400"></i>
+                </div>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center">
+                    <i class="bi bi-plus-lg mr-2"></i> Add New
+                </button>
+            </div>
+        </div>
+
+        <!-- Module Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Class Management Card -->
+            <div class="module-card bg-white p-6 rounded-xl shadow-md">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Class Management</h3>
+                        <p class="text-gray-600 text-sm mb-4">Manage attendance, timetables, and marks</p>
+                    </div>
+                    <i class="bi bi-mortarboard-fill text-3xl text-blue-600"></i>
+                </div>
+                <div class="grid grid-cols-2 gap-2 mt-4">
+                    <button onclick="showModule('attendance')" class="text-sm bg-gray-100 p-2 rounded text-center hover:bg-gray-200">Attendance</button>
+                    <button onclick="showModule('timetable')" class="text-sm bg-gray-100 p-2 rounded text-center hover:bg-gray-200">Timetable</button>
+                    <button onclick="showModule('marks')" class="text-sm bg-gray-100 p-2 rounded text-center hover:bg-gray-200">Marks</button>
+                    <button onclick="showModule('subjects')" class="text-sm bg-gray-100 p-2 rounded text-center hover:bg-gray-200">Subjects</button>
+                </div>
+            </div>
+
+            <!-- Library Management Card -->
+            <div class="module-card bg-white p-6 rounded-xl shadow-md">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Library Management</h3>
+                        <p class="text-gray-600 text-sm mb-4">Manage books and borrowing records</p>
+                    </div>
+                    <i class="bi bi-book-fill text-3xl text-green-600"></i>
+                </div>
+                <div class="grid grid-cols-2 gap-2 mt-4">
+                    <button onclick="showModule('books')" class="text-sm bg-gray-100 p-2 rounded text-center hover:bg-gray-200">Books</button>
+                    <button onclick="showModule('borrowing')" class="text-sm bg-gray-100 p-2 rounded text-center hover:bg-gray-200">Borrowing</button>
+                    <button onclick="showModule('returns')" class="text-sm bg-gray-100 p-2 rounded text-center hover:bg-gray-200">Returns</button>
+                    <button onclick="showModule('inventory')" class="text-sm bg-gray-100 p-2 rounded text-center hover:bg-gray-200">Inventory</button>
+                </div>
+            </div>
+
+            <!-- Finance Management Card -->
+            <div class="module-card bg-white p-6 rounded-xl shadow-md">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Finance Management</h3>
+                        <p class="text-gray-600 text-sm mb-4">Manage fees and financial records</p>
+                    </div>
+                    <i class="bi bi-cash-coin text-3xl text-yellow-600"></i>
+                </div>
+                <div class="grid grid-cols-2 gap-2 mt-4">
+                    <button onclick="showModule('fees')" class="text-sm bg-gray-100 p-2 rounded text-center hover:bg-gray-200">Fees</button>
+                    <button onclick="showModule('expenses')" class="text-sm bg-gray-100 p-2 rounded text-center hover:bg-gray-200">Expenses</button>
+                    <button onclick="showModule('payments')" class="text-sm bg-gray-100 p-2 rounded text-center hover:bg-gray-200">Payments</button>
+                    <button onclick="showModule('reports')" class="text-sm bg-gray-100 p-2 rounded text-center hover:bg-gray-200">Reports</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module Content Area -->
+        <div id="moduleContent" class="mt-8 bg-white p-6 rounded-xl shadow-md hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="moduleTitle" class="text-2xl font-semibold"></h3>
+                <button onclick="closeModule()" class="text-gray-500 hover:text-gray-700">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div id="moduleBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // Module management
+        function showModule(moduleName) {
+            const moduleContent = document.getElementById('moduleContent');
+            const moduleTitle = document.getElementById('moduleTitle');
+            const moduleBody = document.getElementById('moduleBody');
+            
+            moduleContent.classList.remove('hidden');
+            moduleTitle.textContent = moduleName.charAt(0).toUpperCase() + moduleName.slice(1);
+            
+            // Sample content for each module
+            const moduleContents = {
+                attendance: `
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <select class="border rounded p-2">
+                                <option>Class 10-A</option>
+                                <option>Class 10-B</option>
+                                <option>Class 10-C</option>
+                            </select>
+                            <input type="date" class="border rounded p-2">
+                        </div>
+                        <table class="w-full">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="p-3 text-left">Roll No</th>
+                                    <th class="p-3 text-left">Student Name</th>
+                                    <th class="p-3 text-left">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t">
+                                    <td class="p-3">001</td>
+                                    <td class="p-3">John Doe</td>
+                                    <td class="p-3">
+                                        <select class="border rounded">
+                                            <option>Present</option>
+                                            <option>Absent</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `,
+                timetable: `
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-6 gap-4">
+                            <div class="bg-gray-50 p-4 rounded">
+                                <h4 class="font-semibold">Monday</h4>
+                                <div class="mt-2 space-y-2">
+                                    <div class="bg-blue-100 p-2 rounded">Math</div>
+                                    <div class="bg-green-100 p-2 rounded">Science</div>
+                                </div>
+                            </div>
+                            <!-- Add more days -->
+                        </div>
+                    </div>
+                `,
+                // Add more module contents as needed
+            };
+
+            moduleBody.innerHTML = moduleContents[moduleName] || `<p>Content for ${moduleName} module</p>`;
+        }
+
+        function closeModule() {
+            document.getElementById('moduleContent').classList.add('hidden');
+        }
+
+        // Initialize tooltips and other UI elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any initialization code here
+        });
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
